@@ -23,11 +23,13 @@
 
     npm install
 
-3.Pushed .env variables as it is    
+3.There is no need to create Local Database as i have created  Virtual Database(on supabase -postgres Instance) and added the link in env varaibles  
 
-4. node server.js 
+4.Pushed .env variables as it is    
 
-5.Hit API Endpoints 
+5. To start the srever in root run -$ node server.js 
+
+6.Hit API Endpoints 
 
 
 # API Endpoints -
