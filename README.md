@@ -23,7 +23,12 @@
 
     npm install
 
-3.There is no need to create Local Database as i have created  Virtual Database(on supabase -postgres Instance) and added the link in env varaibles  
+3.There is no need to create Local Database as i have created  Virtual Database(on supabase -postgres Instance) and added the link in env varaibles
+  if you want to see the data in the Database  then
+   1) Head over to
+      # https://supabase.com
+      Log-in - mgcodeelite@gmail.com
+      Password - Dailycode@123
 
 4.Pushed .env variables as it is    
 
