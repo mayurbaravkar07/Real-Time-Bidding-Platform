@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement()) 
+  username      String   @unique 
+  email     String  @unique
+  password  String
+  role      String   @default("user")
+  created_at DateTime @default(now())
+  bids            Bids[]
+  notification    Notification[]
+}
+
+
+model Items {
+  id              Int       @id @default(autoincrement())
+  user_id         Int
+  name            String    @db.VarChar(255)
+  description     String
+  starting_price  Decimal
+   
+  //Note for Reviewer ----->Default of current price  is set to starting price prisma does not support such 
+  //features as of now i have manually wrote the trigger in migrations  for seting default price of current price 
+  //to the starting price 
+  
+  current_price   Decimal      
+  image_url       String?
+  end_time        DateTime
+  created_at      DateTime  @default(now())
+  status          String    @default("active")
+  bids            Bids[]
+}
+
+
+
+model Bids {
+  id         Int      @id @default(autoincrement())
+  item_id    Int
+  user_id    Int
+  bid_amount Decimal  
+  created_at DateTime @default(now())
+
+  // Relations
+  item       Items    @relation(fields: [item_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@index([item_id])
+  @@index([user_id])
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  message    String
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now())
+  
+  // Relations
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+}
